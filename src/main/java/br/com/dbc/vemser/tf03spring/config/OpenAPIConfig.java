@@ -13,8 +13,8 @@ public class OpenAPIConfig {
     public OpenAPI springShopOpenAPI() {
         String securitySchemeName = "bearerAuth";
         return new OpenAPI()
-                .info(new Info().title("Pessoa API")
-                        .description("Pessoa API documentação")
+                .info(new Info().title("DBCURSOS TECH")
+                        .description("DBCURSOS TECH documentação")
                         .version("v1.0.0")
                         .license(new License().name("Apache 2.0").url("http://springdoc.org")))
                 .addSecurityItem(new SecurityRequirement().addList(securitySchemeName))

@@ -35,7 +35,7 @@ public class EnderecoController implements EnderecoControllerDoc {
     }
 
 
-    @GetMapping("/relatorioPessoa")
+    @GetMapping("/relatorio")
     public ResponseEntity<List<RelatorioDTO>> createRelatorioDTO() {
         return new ResponseEntity<>(enderecoService.createRelatorioDTO(), HttpStatus.OK);
     }
