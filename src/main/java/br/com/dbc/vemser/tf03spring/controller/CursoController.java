@@ -26,7 +26,7 @@ public class CursoController implements CursoControllerDoc {
     public ResponseEntity<List<CursoDTO>> findAll() {
         return new ResponseEntity<>(cursoService.findAll(), HttpStatus.OK);
     }
-    @GetMapping("/criarrelatoriocurso")
+    @GetMapping("/relatorio")
     public ResponseEntity<List<RelatorioCursoDTO>> createRelatorioCursoDTO(){
         return new ResponseEntity<>(cursoService.createRelatorioCursoDTO(), HttpStatus.OK);
     }
