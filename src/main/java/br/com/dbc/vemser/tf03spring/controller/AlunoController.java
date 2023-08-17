@@ -55,7 +55,7 @@ public class AlunoController implements AlunoControllerDoc {
         return new ResponseEntity<>(alunosEncontrados, HttpStatus.OK);
     }
 
-    @GetMapping("/alunos-paginados")
+    @GetMapping("/paginado")
     public Page<AlunoDTO> findAllPaginados(Integer numeroDePaginas, Integer quantidadeDeRegistros) {
         Sort ordenacao = Sort.by("nome");
 

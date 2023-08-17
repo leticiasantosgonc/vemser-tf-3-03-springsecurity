@@ -37,7 +37,7 @@ public class ProfessorController implements ProfessorControllerDoc {
         return new ResponseEntity<>(professorService.findAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/professores-paginados")
+    @GetMapping("/paginado")
     public Page<ProfessorDTO> findAllPaginados(Integer numeroDePaginas, Integer quantidadeDeRegistros) {
         Sort ordenacao = Sort.by("nome");
 
