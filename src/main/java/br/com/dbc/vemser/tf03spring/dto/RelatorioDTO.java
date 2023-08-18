@@ -2,8 +2,6 @@ package br.com.dbc.vemser.tf03spring.dto;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-
 @Data
 public class RelatorioDTO {
 
