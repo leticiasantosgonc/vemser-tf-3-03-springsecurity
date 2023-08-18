@@ -28,11 +28,8 @@ public class SecurityConfiguration {
                 .cors().and()
                 .csrf().disable()
                 .authorizeHttpRequests((authz) -> authz
-                        .antMatchers("/auth", "/").permitAll()
-                        .antMatchers("/curso", "/").permitAll()
-                        .antMatchers("/endereco", "/").permitAll()
-                        .antMatchers("/professor", "/").permitAll()
-                        .antMatchers("/aluno", "/").permitAll()
+                        .antMatchers("/acesso", "/").permitAll()
+                        .antMatchers("/acesso/cadastrar", "/").permitAll()
                         .anyRequest().authenticated()
                 );
         http.addFilterBefore(new TokenAuthenticationFilter(tokenService), UsernamePasswordAuthenticationFilter.class);
@@ -47,7 +44,6 @@ public class SecurityConfiguration {
                 "/swagger-resources/**",
                 "/swagger-ui/**");
     }
-
 
     @Bean
     public WebMvcConfigurer corsConfigurer() {
