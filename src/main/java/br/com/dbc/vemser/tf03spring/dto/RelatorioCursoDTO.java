@@ -1,11 +1,6 @@
 package br.com.dbc.vemser.tf03spring.dto;
 
-import br.com.dbc.vemser.tf03spring.model.enums.TipoPeriodo;
 import lombok.Data;
-
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 
 @Data
 public class RelatorioCursoDTO {
