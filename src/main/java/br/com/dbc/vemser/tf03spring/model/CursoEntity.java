@@ -1,7 +1,6 @@
 package br.com.dbc.vemser.tf03spring.model;
 
 import br.com.dbc.vemser.tf03spring.model.enums.TipoPeriodo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
