@@ -31,4 +31,7 @@ public class CursoEntity {
     @Column(name = "ID_PROFESSOR")
     private Integer idProfessor;
 
+    @Column (name = "DESCRICAO")
+    private String descricao;
+
 }
