@@ -1,7 +1,6 @@
 package br.com.dbc.vemser.tf03spring.repository;
 
 import br.com.dbc.vemser.tf03spring.dto.RelatorioCursoDTO;
-import br.com.dbc.vemser.tf03spring.dto.RelatorioDTO;
 import br.com.dbc.vemser.tf03spring.model.CursoEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

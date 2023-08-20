@@ -1,6 +1,5 @@
 package br.com.dbc.vemser.tf03spring.documentation;
 
-import br.com.dbc.vemser.tf03spring.dto.LoginDTO;
 import br.com.dbc.vemser.tf03spring.dto.UsuarioCreateDTO;
 import br.com.dbc.vemser.tf03spring.dto.UsuarioDTO;
 import br.com.dbc.vemser.tf03spring.exception.RegraDeNegocioException;
@@ -25,7 +24,7 @@ public interface AuthControllerDoc {
             }
     )
     @PostMapping
-    public String auth(@RequestBody @Valid LoginDTO loginDTO) throws RegraDeNegocioException;
+    public String auth(@RequestBody @Valid UsuarioCreateDTO usuarioDTO) throws RegraDeNegocioException;
 
     @Operation(summary = "Cria usuário", description = "Cria usuário para acesso as rotas." +
             " Para isso, as informações do usuário a ser persistido deverão ser informadas no campo da" +
