@@ -38,6 +38,7 @@ public class AlunoController implements AlunoControllerDoc {
         AlunoDTO alunoParaPersistir = objectMapper.convertValue(alunoCreateDTO, AlunoDTO.class);
         AlunoDTO alunoPersistido = alunoService.create(alunoParaPersistir);
 
+
         if (alunoPersistido == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

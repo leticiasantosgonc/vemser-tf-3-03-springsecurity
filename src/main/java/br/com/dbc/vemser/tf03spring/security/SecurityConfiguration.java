@@ -3,8 +3,10 @@ package br.com.dbc.vemser.tf03spring.security;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
@@ -16,9 +18,12 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
+import static org.springframework.http.HttpMethod.*;
+
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
+
 public class SecurityConfiguration {
     private final TokenService tokenService;
 
@@ -28,9 +33,17 @@ public class SecurityConfiguration {
                 .cors().and()
                 .csrf().disable()
                 .authorizeHttpRequests((authz) -> authz
-                        .antMatchers("/acesso", "/").permitAll()
-                        .antMatchers("/acesso/cadastrar", "/").permitAll()
-                        .anyRequest().authenticated()
+                        .antMatchers("/").permitAll()
+                        .antMatchers("/acesso/**").permitAll()
+                        .antMatchers(GET,"/aluno/**").hasAnyRole( "USER", "ADMIN")
+                        .antMatchers("/aluno/**").hasRole("ADMIN")
+                        .antMatchers(GET,"/professor/**").hasAnyRole("USER", "ADMIN")
+                        .antMatchers("/professor/**").hasRole("ADMIN")
+                        .antMatchers(GET, "/curso/**").hasAnyRole("USER", "ADMIN")
+                        .antMatchers("/curso/**").hasRole("ADMIN")
+                        .antMatchers(GET, "/endereco/**").hasAnyRole("USER", "ADMIN")
+                        .antMatchers("/endereco/**").hasRole("ADMIN")
+                        .anyRequest().denyAll()
                 );
         http.addFilterBefore(new TokenAuthenticationFilter(tokenService), UsernamePasswordAuthenticationFilter.class);
 
@@ -65,4 +78,5 @@ public class SecurityConfiguration {
     public PasswordEncoder passwordEncoder(){
         return new Pbkdf2PasswordEncoder();
     }
+
 }
