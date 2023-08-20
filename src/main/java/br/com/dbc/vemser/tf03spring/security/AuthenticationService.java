@@ -23,4 +23,5 @@ public class AuthenticationService implements UserDetailsService {
         return usuarioEntityOptional
                 .orElseThrow(() -> new UsernameNotFoundException("Usuario inválido"));
     }
+
 }

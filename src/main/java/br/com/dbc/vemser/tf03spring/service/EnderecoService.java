@@ -8,7 +8,6 @@ import br.com.dbc.vemser.tf03spring.exception.BancoDeDadosException;
 import br.com.dbc.vemser.tf03spring.exception.RegraDeNegocioException;
 import br.com.dbc.vemser.tf03spring.model.AlunoEntity;
 import br.com.dbc.vemser.tf03spring.model.EnderecoEntity;
-import br.com.dbc.vemser.tf03spring.model.ProfessorEntity;
 import br.com.dbc.vemser.tf03spring.repository.EnderecoRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
