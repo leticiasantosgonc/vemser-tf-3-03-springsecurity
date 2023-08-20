@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,6 +20,7 @@ public class CursoCreateDTO {
     private String nome;
 
     @NotNull(message = "O campo cargaHoraria não pode ser nulo")
+    @Positive
     @Schema(description = "Carga horária do curso", required = true, example = "60")
     private Integer cargaHoraria;
 
@@ -26,9 +28,13 @@ public class CursoCreateDTO {
     @Schema(description = "Período do curso", required = true, example = "MANHA")
     private TipoPeriodo periodo;
 
+    @NotNull
+    @Positive
     private Integer idProfessor;
 
     @Schema(description = "Descrição do curso", required = true)
+    @NotNull
+    @NotBlank
     private String descricao;
 
 }
