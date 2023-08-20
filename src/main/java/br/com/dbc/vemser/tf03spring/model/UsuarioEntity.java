@@ -1,5 +1,6 @@
 package br.com.dbc.vemser.tf03spring.model;
 
+import br.com.dbc.vemser.tf03spring.security.roles.Roles;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
@@ -13,21 +14,25 @@ import java.util.Collection;
 @Setter
 @Entity(name = "USUARIO")
 public class UsuarioEntity implements UserDetails {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USUARIO_SEQUENCIA")
-    @SequenceGenerator(name = "USUARIO_SEQUENCIA", sequenceName = "seq_usuario", allocationSize = 1)
-    @Column(name = "id_usuario")
+    @SequenceGenerator(name = "USUARIO_SEQUENCIA", sequenceName = "SEQ_USUARIO", allocationSize = 1)
+    @Column(name = "ID_USUARIO")
     private Integer idUsuario;
 
-    @Column(name = "login")
+    @Column(name = "LOGIN")
     private String login;
 
-    @Column(name = "senha")
+    @Column(name = "SENHA")
     private String senha;
+
+    @Enumerated(EnumType.STRING)
+    private Roles role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return new ArrayList<>();
+        return role.getAuthorities();
     }
 
     @Override
@@ -59,4 +64,5 @@ public class UsuarioEntity implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
 }
