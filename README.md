@@ -44,6 +44,10 @@ DBCursos Tech é um projeto em Java. O projeto foi um desafio proposto como test
 - `POST/aluno`: cria um novo aluno;
 - `GET/aluno/paginado`: lista alunos páginado.
 
+### Auth
+- `POST/acesso`: gerar token de acesso;
+- `POST/acesso/cadastrar`: cadastrar um novo usuário;
+
 ## Pré-requisitos
 Para executar o projeto, siga os passos abaixo:
 

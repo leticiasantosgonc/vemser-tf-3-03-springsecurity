@@ -28,4 +28,7 @@ public class CursoCreateDTO {
 
     private Integer idProfessor;
 
+    @Schema(description = "Descrição do curso", required = true)
+    private String descricao;
+
 }

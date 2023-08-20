@@ -1,7 +1,6 @@
 package br.com.dbc.vemser.tf03spring.controller;
 
 import br.com.dbc.vemser.tf03spring.documentation.AuthControllerDoc;
-import br.com.dbc.vemser.tf03spring.dto.LoginDTO;
 import br.com.dbc.vemser.tf03spring.dto.UsuarioCreateDTO;
 import br.com.dbc.vemser.tf03spring.dto.UsuarioDTO;
 import br.com.dbc.vemser.tf03spring.exception.RegraDeNegocioException;
@@ -32,11 +31,11 @@ public class AuthController implements AuthControllerDoc {
     private final UsuarioService usuarioService;
 
     @PostMapping
-    public String auth(@RequestBody @Valid LoginDTO loginDTO) throws RegraDeNegocioException {
+    public String auth(@RequestBody @Valid UsuarioCreateDTO usuarioDTO) throws RegraDeNegocioException {
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
                 new UsernamePasswordAuthenticationToken(
-                        loginDTO.getLogin(),
-                        loginDTO.getSenha()
+                        usuarioDTO.getLogin(),
+                        usuarioDTO.getSenha()
                 );
 
         Authentication authentication =
