@@ -1,8 +1,6 @@
 package br.com.dbc.vemser.tf03spring.security;
 
-
 import br.com.dbc.vemser.tf03spring.model.UsuarioEntity;
-import br.com.dbc.vemser.tf03spring.service.UsuarioService;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
