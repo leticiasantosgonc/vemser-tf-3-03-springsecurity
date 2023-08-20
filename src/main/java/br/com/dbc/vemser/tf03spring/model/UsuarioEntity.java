@@ -1,6 +1,6 @@
 package br.com.dbc.vemser.tf03spring.model;
 
-import br.com.dbc.vemser.tf03spring.security.roles.Roles;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -27,12 +28,17 @@ public class UsuarioEntity implements UserDetails {
     @Column(name = "SENHA")
     private String senha;
 
-    @Enumerated(EnumType.STRING)
-    private Roles role;
+    @JsonIgnore
+    @ManyToMany
+    @JoinTable(name = "USUARIO_CARGO",
+                joinColumns = @JoinColumn(name = "id_usuario"),
+                inverseJoinColumns = @JoinColumn(name = "id_cargo")
+    )
+    private Set<CargoEntity> cargos;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return role.getAuthorities();
+        return new ArrayList<>();
     }
 
     @Override
