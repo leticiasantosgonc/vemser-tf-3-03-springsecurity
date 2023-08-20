@@ -14,6 +14,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class UsuarioService {
+
     private final UsuarioRepository usuarioRepository;
     private final PasswordEncoder passwordEncoder;
     private final ObjectMapper objectMapper;
@@ -41,4 +42,5 @@ public class UsuarioService {
     public UsuarioDTO retornarDTO(UsuarioEntity usuarioEntity) {
         return objectMapper.convertValue(usuarioEntity, UsuarioDTO.class);
     }
+
 }
