@@ -15,10 +15,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -51,9 +48,36 @@ public class AuthController implements AuthControllerDoc {
         return tokenService.generateToken(usuarioValidado);
     }
 
-    @PostMapping("/cadastrar")
-    public ResponseEntity<UsuarioDTO> createUsuario(@RequestBody UsuarioCreateDTO usuario){
+    @PostMapping("/cadastraradmin")
+    public ResponseEntity<UsuarioDTO> createAdmin(@RequestBody UsuarioCreateDTO usuario){
         log.info("Auth: inserir novo");
-        return new ResponseEntity<>(usuarioService.createUsuario(usuario), HttpStatus.OK);
+        return new ResponseEntity<>(usuarioService.createAdmin(usuario), HttpStatus.OK);
     }
+
+    @DeleteMapping("/{idUsuario}")
+    public ResponseEntity<Void> desativarUsuario(@PathVariable Integer idUsuario){
+        usuarioService.desativarUsuario(idUsuario);
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/alterarsenha/{idUsuario}")
+    public ResponseEntity<UsuarioDTO> updatePassword(@PathVariable Integer idUsuario, @RequestBody String senha) throws RegraDeNegocioException {
+        return new ResponseEntity<>(usuarioService.alterarSenha(idUsuario, senha), HttpStatus.OK);
+    }
+
+    @PutMapping("/{idUsuario}")
+    public ResponseEntity<UsuarioDTO> update(@PathVariable Integer idUsuario, @RequestBody UsuarioCreateDTO usuarioCreateDTO) throws RegraDeNegocioException {
+        return new ResponseEntity<>(usuarioService.updateUsuario(idUsuario, usuarioCreateDTO), HttpStatus.OK);
+    }
+
+    @GetMapping("/retornarusuariologado")
+    public ResponseEntity<UsuarioDTO> retornarUsuarioLogado() throws RegraDeNegocioException {
+        return new ResponseEntity<>(usuarioService.retornarUsuarioLogado(), HttpStatus.OK);
+    }
+
+    @PostMapping("/cadastrarusuario")
+    public ResponseEntity<UsuarioDTO> createUsuario(@RequestBody UsuarioCreateDTO usuarioCreateDTO){
+        return new ResponseEntity<>(usuarioService.createUsuario(usuarioCreateDTO), HttpStatus.OK);
+    }
+
 }
