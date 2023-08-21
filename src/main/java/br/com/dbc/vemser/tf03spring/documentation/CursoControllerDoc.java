@@ -2,6 +2,7 @@ package br.com.dbc.vemser.tf03spring.documentation;
 
 import br.com.dbc.vemser.tf03spring.dto.CursoCreateDTO;
 import br.com.dbc.vemser.tf03spring.dto.CursoDTO;
+import br.com.dbc.vemser.tf03spring.dto.RelatorioCursoDTO;
 import br.com.dbc.vemser.tf03spring.exception.BancoDeDadosException;
 import br.com.dbc.vemser.tf03spring.exception.RegraDeNegocioException;
 import io.swagger.v3.oas.annotations.Operation;
@@ -26,10 +27,10 @@ public interface CursoControllerDoc {
     public ResponseEntity<List<CursoDTO>> findAll();
 
 
-    @Operation(summary = "Lista um curso pelo sei id", description = "Lista um curso específico no banco de dados.")
+    @Operation(summary = "Procura curso", description = "Procura curso pelo id no banco de dados.")
     @ApiResponses(
             value = {
-                    @ApiResponse(responseCode = "200", description = "Lista um curso pelo id"),
+                    @ApiResponse(responseCode = "200", description = "Procura professor pelo id."),
                     @ApiResponse(responseCode = "403", description = "Você não tem permissão para acessar este recurso"),
                     @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
             }
@@ -38,7 +39,7 @@ public interface CursoControllerDoc {
     ResponseEntity<CursoDTO> findById(@PathVariable ("idCurso") Integer idCurso) throws BancoDeDadosException, RegraDeNegocioException;
 
 
-    @Operation(summary = "Cria um curso", description = "Cria um curso a partir de um body JSON ")
+    @Operation(summary = "Cria um curso", description = "Cria um curso e o persiste no banco de dados.")
     @ApiResponses(
             value = {
                     @ApiResponse(responseCode = "200", description = "Curso criado com sucesso"),
@@ -50,7 +51,7 @@ public interface CursoControllerDoc {
     ResponseEntity<CursoDTO> create(@Valid @RequestBody CursoCreateDTO curso) throws Exception;
 
 
-    @Operation(summary = "Atualiza um curso", description = "Atualiza um curso a partir do idCurso")
+    @Operation(summary = "Atualiza um curso", description = "Atualiza um curso e o persiste no banco de dados.")
     @ApiResponses(
             value = {
                     @ApiResponse(responseCode = "200", description = "Curso atualizado com sucesso"),
@@ -62,14 +63,26 @@ public interface CursoControllerDoc {
     ResponseEntity<CursoDTO> update(@Valid @RequestBody CursoCreateDTO curso, @PathVariable("idCurso") Integer idCurso) throws Exception;
 
 
-    @Operation(summary = "Exclui um curso", description = "Exclui um curso do banco de dados")
+    @Operation(summary = "Deleta um curso", description = "Deleta um professor do banco de dados")
     @ApiResponses(
             value = {
-                    @ApiResponse(responseCode = "200", description = "Curso excluído com sucesso"),
+                    @ApiResponse(responseCode = "200", description = "Curso deletado com sucesso"),
                     @ApiResponse(responseCode = "403", description = "Você não tem permissão para acessar este recurso"),
                     @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
             }
     )
     @DeleteMapping("/{idCurso}")
     ResponseEntity<Void> delete (@PathVariable("idCurso") Integer idCurso) throws Exception;
+
+    @Operation(summary = "Cria um relatório de cursos", description = "Cria um relatório de cursos com professores vinculados."
+    )
+    @ApiResponses(
+            value = {
+                    @ApiResponse(responseCode = "200", description = "Cria um relatório de cursos com professores vinculados."),
+                    @ApiResponse(responseCode = "403", description = "Você não tem permissão para acessar este recurso"),
+                    @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
+            }
+    )
+    @GetMapping("/relatorio")
+    public ResponseEntity<List<RelatorioCursoDTO>> createRelatorioCursoDTO();
 }

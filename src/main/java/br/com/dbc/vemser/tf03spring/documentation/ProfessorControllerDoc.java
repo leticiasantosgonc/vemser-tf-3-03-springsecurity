@@ -6,6 +6,7 @@ import br.com.dbc.vemser.tf03spring.exception.RegraDeNegocioException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -78,4 +79,15 @@ public interface ProfessorControllerDoc {
     @DeleteMapping("/{idProfessor}")
     public ResponseEntity<Void> delete(@PathVariable("idProfessor") @Positive Integer idProfessor) throws RegraDeNegocioException;
 
+    @Operation(summary = "Lista professores paginados", description = "Lista professores paginados." +
+            "Para isso, informar a página e a quantidade de professores a serem mostradas")
+    @ApiResponses(
+            value = {
+                    @ApiResponse(responseCode = "200", description = "Retorna páginação de professores paginado conforme os argumentos recebidos."),
+                    @ApiResponse(responseCode = "403", description = "Você não tem permissão para acessar este recurso"),
+                    @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
+            }
+    )
+    @GetMapping("/paginado")
+    public Page<ProfessorDTO> findAllPaginados(Integer numeroDePaginas, Integer quantidadeDeRegistros);
 }

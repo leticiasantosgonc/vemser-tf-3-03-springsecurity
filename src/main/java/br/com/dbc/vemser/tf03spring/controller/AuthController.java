@@ -8,6 +8,7 @@ import br.com.dbc.vemser.tf03spring.model.UsuarioEntity;
 import br.com.dbc.vemser.tf03spring.security.TokenService;
 import br.com.dbc.vemser.tf03spring.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
+@Slf4j
 @RestController
 @RequestMapping("/acesso")
 @Validated
@@ -44,11 +46,14 @@ public class AuthController implements AuthControllerDoc {
 
         UsuarioEntity usuarioValidado = (UsuarioEntity) authentication.getPrincipal();
 
+        log.info("Auth: token gerado");
+
         return tokenService.generateToken(usuarioValidado);
     }
 
     @PostMapping("/cadastrar")
     public ResponseEntity<UsuarioDTO> createUsuario(@RequestBody UsuarioCreateDTO usuario){
+        log.info("Auth: inserir novo");
         return new ResponseEntity<>(usuarioService.createUsuario(usuario), HttpStatus.OK);
     }
 }
