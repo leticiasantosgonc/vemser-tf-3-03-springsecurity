@@ -6,11 +6,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@OpenAPIDefinition(
-		servers = {
-				@Server(url = "/leticiasantosgonc/vemser-tf-3-03-springsecurity", description = "Default Server URL")
-		}
-)
+//@OpenAPIDefinition(
+//		servers = {
+//				@Server(url = "/leticiasantosgonc/vemser-tf-3-03-springsecurity", description = "Default Server URL")
+//		}
+//)
 public class DbcursosTechApplication {
 
 	public static void main(String[] args) {

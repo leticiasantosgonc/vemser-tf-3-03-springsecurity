@@ -9,6 +9,7 @@ import br.com.dbc.vemser.tf03spring.service.AlunoService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import freemarker.template.TemplateException;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -27,6 +28,7 @@ import java.util.List;
 @Validated
 @RestController
 @AllArgsConstructor
+@Slf4j
 @RequestMapping("/aluno")
 public class AlunoController implements AlunoControllerDoc {
 
@@ -42,6 +44,7 @@ public class AlunoController implements AlunoControllerDoc {
         if (alunoPersistido == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+        log.info("Aluno: inserir novo");
 
         return new ResponseEntity<>(alunoPersistido, HttpStatus.OK);
     }
@@ -53,6 +56,7 @@ public class AlunoController implements AlunoControllerDoc {
         if (alunosEncontrados.get(0) == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+        log.info("Aluno: listar todos");
 
         return new ResponseEntity<>(alunosEncontrados, HttpStatus.OK);
     }
@@ -62,6 +66,7 @@ public class AlunoController implements AlunoControllerDoc {
         Sort ordenacao = Sort.by("nome");
 
         Pageable pageable = PageRequest.of(numeroDePaginas, quantidadeDeRegistros, ordenacao);
+        log.info("Aluno: retorna alunos por pagina");
 
         return alunoService.findAll(pageable);
     }
@@ -73,6 +78,7 @@ public class AlunoController implements AlunoControllerDoc {
         if (alunoEncontrado == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+        log.info("Aluno: listar por id do aluno");
 
         return new ResponseEntity<>(alunoEncontrado, HttpStatus.OK);
     }
@@ -86,13 +92,15 @@ public class AlunoController implements AlunoControllerDoc {
         if (alunoAtualizado == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-
+        log.info("Aluno: editar pelo id");
         return new ResponseEntity<>(alunoAtualizado, HttpStatus.OK);
     }
 
     @DeleteMapping("/{idAluno}")
     public ResponseEntity<Void> delete(@PathVariable("idAluno") @Positive(message = "O ID deve ser um número inteiro positivo") Integer idAluno) throws RegraDeNegocioException {
         alunoService.delete(idAluno);
+
+        log.info("Aluno: deletar por id");
 
         return new ResponseEntity<>(HttpStatus.OK);
     }

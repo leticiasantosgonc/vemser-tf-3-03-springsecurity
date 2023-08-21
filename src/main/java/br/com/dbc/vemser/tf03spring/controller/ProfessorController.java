@@ -47,7 +47,7 @@ public class ProfessorController implements ProfessorControllerDoc {
 
     @GetMapping("/{idProfessor}")
     public ResponseEntity<ProfessorDTO> findById(@PathVariable ("idProfessor") @Positive Integer idProfessor) throws RegraDeNegocioException {
-        log.info("Professor: listar por Id do professor");
+        log.info("Professor: listar por id do professor");
         return new ResponseEntity<>(professorService.findById(idProfessor), HttpStatus.OK);
     }
     @PostMapping
@@ -58,7 +58,7 @@ public class ProfessorController implements ProfessorControllerDoc {
 
     @PutMapping("/{idProfessor}")
     public ResponseEntity<ProfessorDTO> update(@PathVariable("idProfessor") @Positive Integer idProfessor, @RequestBody @Valid ProfessorCreateDTO professorDTO) throws RegraDeNegocioException {
-        log.info("Professor: editar");
+        log.info("Professor: editar pelo id");
         ProfessorDTO professorAtualizar = professorService.update(idProfessor, professorDTO);
         return new ResponseEntity<>(professorAtualizar, HttpStatus.OK);
     }

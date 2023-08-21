@@ -15,11 +15,11 @@ import javax.validation.constraints.Positive;
 import java.util.List;
 
 public interface EnderecoControllerDoc {
-    @Operation(summary = "Cria um relatório de enderecos", description = "Cria um relatorio com as informacoes dps emderecps e dos alunos vinculados."
+    @Operation(summary = "Cria um relatório de enderecos", description = "Cria um relatório de endereços com alunos vinculados."
     )
     @ApiResponses(
             value = {
-                    @ApiResponse(responseCode = "200", description = "Cria um relatorio com as informacoes dps emderecps e dos alunos vinculados."),
+                    @ApiResponse(responseCode = "200", description = "Cria um relatório de endereços com alunos vinculados."),
                     @ApiResponse(responseCode = "403", description = "Você não tem permissão para acessar este recurso"),
                     @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
             }
@@ -55,10 +55,10 @@ public interface EnderecoControllerDoc {
     @GetMapping
     ResponseEntity<List<EnderecoDTO>> findAll() throws BancoDeDadosException;
 
-    @Operation(summary = "Lista todos os enderecos por id", description = "Lista todos os enderecos do banco de dados por id.")
+    @Operation(summary = "Procura endereco", description = "Procura endereco pelo id no banco de dados.")
     @ApiResponses(
             value = {
-                    @ApiResponse(responseCode = "200", description = "Lista todos os enderecos por id "),
+                    @ApiResponse(responseCode = "200", description = "Procura endereco pelo id."),
                     @ApiResponse(responseCode = "403", description = "Você não tem permissão para acessar este recurso"),
                     @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
             }
