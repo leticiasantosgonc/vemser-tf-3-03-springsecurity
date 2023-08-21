@@ -48,20 +48,22 @@ public class AuthController implements AuthControllerDoc {
         return tokenService.generateToken(usuarioValidado);
     }
 
-    @PostMapping("/cadastraradmin")
+    @PostMapping("/cadastrar/administrador")
     public ResponseEntity<UsuarioDTO> createAdmin(@RequestBody UsuarioCreateDTO usuario){
-        log.info("Auth: inserir novo");
+        log.info("Auth: inserir novo administrador");
         return new ResponseEntity<>(usuarioService.createAdmin(usuario), HttpStatus.OK);
     }
 
     @DeleteMapping("/{idUsuario}")
     public ResponseEntity<Void> desativarUsuario(@PathVariable Integer idUsuario){
         usuarioService.desativarUsuario(idUsuario);
+        log.info("Auth: deletar usuário");
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping("/alterarsenha/{idUsuario}")
+    @PutMapping("/alterar-senha/{idUsuario}")
     public ResponseEntity<UsuarioDTO> updatePassword(@PathVariable Integer idUsuario, @RequestBody String senha) throws RegraDeNegocioException {
+        log.info("Auth: alterar senha do usuário");
         return new ResponseEntity<>(usuarioService.alterarSenha(idUsuario, senha), HttpStatus.OK);
     }
 
@@ -70,12 +72,12 @@ public class AuthController implements AuthControllerDoc {
         return new ResponseEntity<>(usuarioService.updateUsuario(idUsuario, usuarioCreateDTO), HttpStatus.OK);
     }
 
-    @GetMapping("/retornarusuariologado")
+    @GetMapping("/dados/logado")
     public ResponseEntity<UsuarioDTO> retornarUsuarioLogado() throws RegraDeNegocioException {
         return new ResponseEntity<>(usuarioService.retornarUsuarioLogado(), HttpStatus.OK);
     }
 
-    @PostMapping("/cadastrarusuario")
+    @PostMapping("/cadastrar/usuario")
     public ResponseEntity<UsuarioDTO> createUsuario(@RequestBody UsuarioCreateDTO usuarioCreateDTO){
         return new ResponseEntity<>(usuarioService.createUsuario(usuarioCreateDTO), HttpStatus.OK);
     }
