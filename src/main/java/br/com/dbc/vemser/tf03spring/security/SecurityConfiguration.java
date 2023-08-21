@@ -33,7 +33,7 @@ public class SecurityConfiguration {
                 .cors().and()
                 .csrf().disable()
                 .authorizeHttpRequests((authz) -> authz
-                        .antMatchers("/", "/acesso/cadastrarusuario").permitAll()
+                        .antMatchers("/", "/acesso/cadastrar/usuario").permitAll()
                         .antMatchers("/acesso").permitAll()
 //                        .antMatchers(PUT, "/acesso/**").hasRole("ADMIN")
                         .antMatchers("/acesso/retornarusuariologado").hasAnyRole("USER", "ADMIN")
