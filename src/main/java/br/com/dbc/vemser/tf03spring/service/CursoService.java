@@ -58,7 +58,7 @@ public class CursoService{
         cursoAtualizado.setNome(curso.getNome());
         cursoAtualizado.setPeriodo(curso.getPeriodo());
         cursoAtualizado.setCargaHoraria(curso.getCargaHoraria());
-        cursoAtualizado.setDescricao(curso.getDescricao());
+//        cursoAtualizado.setDescricao(curso.getDescricao());
         cursoRepository.save(cursoAtualizado);
         return  returnDTO(cursoAtualizado);
     }
