@@ -32,9 +32,9 @@ public class CursoCreateDTO {
     @Positive
     private Integer idProfessor;
 
-    @Schema(description = "Descrição do curso", required = true)
-    @NotNull
-    @NotBlank
-    private String descricao;
+//    @Schema(description = "Descrição do curso", required = true)
+//    @NotNull
+//    @NotBlank
+//    private String descricao;
 
 }
