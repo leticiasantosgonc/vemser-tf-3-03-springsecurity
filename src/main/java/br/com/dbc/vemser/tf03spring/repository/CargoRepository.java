@@ -1,7 +1,6 @@
 package br.com.dbc.vemser.tf03spring.repository;
 
 import br.com.dbc.vemser.tf03spring.model.CargoEntity;
-import br.com.dbc.vemser.tf03spring.model.UsuarioEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -10,9 +9,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Integer> {
-    Optional<UsuarioEntity> findByLoginAndSenha(String login, String senha);
+public interface CargoRepository extends JpaRepository<CargoEntity, Integer>{
 
-    Optional<UsuarioEntity> findByLogin(String login);
+//    @Query("SELECT * FROM CARGO WHERE ID_CARGO = 2")
+    Optional<CargoEntity> findById(Integer idCargo);
 
+
+//    @Query("SELECT * FROM CARGO WHERE ID_CARGO = 1")
+//    CargoEntity retornarCargoAdmin();
 }

@@ -12,5 +12,4 @@ public class ProfessorDTO extends ProfessorCreateDTO {
 
     @Schema(description = "ID do professor")
     private Integer idProfessor;
-
 }

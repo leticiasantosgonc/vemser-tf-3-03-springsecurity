@@ -10,6 +10,7 @@ import br.com.dbc.vemser.tf03spring.exception.RegraDeNegocioException;
 import br.com.dbc.vemser.tf03spring.model.EnderecoEntity;
 import br.com.dbc.vemser.tf03spring.service.EnderecoService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import java.util.List;
 
+@Slf4j
 @RestController
 @Validated
 @ControllerAdvice
@@ -37,6 +39,7 @@ public class EnderecoController implements EnderecoControllerDoc {
 
     @GetMapping("/relatorio")
     public ResponseEntity<List<RelatorioDTO>> createRelatorioDTO() {
+        log.info("Endereco: listar relatório de cursos");
         return new ResponseEntity<>(enderecoService.createRelatorioDTO(), HttpStatus.OK);
     }
     @PostMapping
@@ -46,6 +49,7 @@ public class EnderecoController implements EnderecoControllerDoc {
         if (ObjectUtils.isEmpty(enderecoCriado)) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
+        log.info("Endereco: inserir novo");
 
         return new ResponseEntity<>(retornarDTO(enderecoCriado), HttpStatus.CREATED);
     }
@@ -57,6 +61,7 @@ public class EnderecoController implements EnderecoControllerDoc {
         if (ObjectUtils.isEmpty(todosOsEnderecos)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
+        log.info("Endereco: listar todos");
 
         return new ResponseEntity<>(todosOsEnderecos, HttpStatus.OK);
     }
@@ -68,6 +73,7 @@ public class EnderecoController implements EnderecoControllerDoc {
         if (ObjectUtils.isEmpty(enderecoEncontrado)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
+        log.info("Endereco: listar por id do endereco");
 
         return new ResponseEntity<>(enderecoEncontrado, HttpStatus.OK);
     }
@@ -75,12 +81,14 @@ public class EnderecoController implements EnderecoControllerDoc {
     @PutMapping("/{idEndereco}")
     public ResponseEntity<EnderecoDTO> update(@PathVariable("idEndereco") @Positive Integer idEndereco, @RequestBody @Valid EnderecoDTO enderecoDTO) throws RegraDeNegocioException {
         EnderecoDTO enderecoAtualizar = enderecoService.update(idEndereco, enderecoDTO);
+        log.info("Endereco: editar pelo id");
         return new ResponseEntity<>(enderecoAtualizar, HttpStatus.OK);
     }
 
     @DeleteMapping("/{idEndereco}")
     public ResponseEntity<Void> delete(@PathVariable("idEndereco") @Positive Integer idEndereco) throws BancoDeDadosException {
         enderecoService.delete(idEndereco);
+        log.info("Endereco: deletar pelo id");
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 

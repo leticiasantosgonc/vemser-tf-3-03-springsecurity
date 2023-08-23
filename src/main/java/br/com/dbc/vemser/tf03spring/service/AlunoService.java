@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 
 
@@ -44,13 +43,13 @@ public class AlunoService {
             throw new RegraDeNegocioException(MENSAGEM_ALUNO_NAO_ENCONTRADO);
         }
 
-        Map<String, String> dados = new HashMap<>();
-        dados.put("nome", alunoDTO.getNome());
-        String text = "Bem vindo a DBCURSOS TECH!<br>" +
-                "           Seu cadastro foi realizado com sucesso.<br>";
-        dados.put("text", text);
-        dados.put("email", alunoDTO.getEmail());
-        emailService.sendTemplateEmail(dados);
+//        Map<String, String> dados = new HashMap<>();
+//        dados.put("nome", alunoDTO.getNome());
+//        String text = "Bem vindo a DBCURSOS TECH!<br>" +
+//                "           Seu cadastro foi realizado com sucesso.<br>";
+//        dados.put("text", text);
+//        dados.put("email", alunoDTO.getEmail());
+//        emailService.sendTemplateEmail(dados);
 
         return converterAlunoParaAlunoDto(alunoEntityPersistido);
     }

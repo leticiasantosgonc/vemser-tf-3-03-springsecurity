@@ -8,19 +8,18 @@ import br.com.dbc.vemser.tf03spring.model.UsuarioEntity;
 import br.com.dbc.vemser.tf03spring.security.TokenService;
 import br.com.dbc.vemser.tf03spring.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+@Slf4j
 @RestController
 @RequestMapping("/acesso")
 @Validated
@@ -44,11 +43,43 @@ public class AuthController implements AuthControllerDoc {
 
         UsuarioEntity usuarioValidado = (UsuarioEntity) authentication.getPrincipal();
 
+        log.info("Auth: token gerado");
+
         return tokenService.generateToken(usuarioValidado);
     }
 
-    @PostMapping("/cadastrar")
-    public ResponseEntity<UsuarioDTO> createUsuario(@RequestBody UsuarioCreateDTO usuario){
-        return new ResponseEntity<>(usuarioService.createUsuario(usuario), HttpStatus.OK);
+    @PostMapping("/cadastrar/administrador")
+    public ResponseEntity<UsuarioDTO> createAdmin(@RequestBody UsuarioCreateDTO usuario){
+        log.info("Auth: inserir novo administrador");
+        return new ResponseEntity<>(usuarioService.createAdmin(usuario), HttpStatus.OK);
     }
+
+    @DeleteMapping("/{idUsuario}")
+    public ResponseEntity<Void> desativarUsuario(@PathVariable Integer idUsuario){
+        usuarioService.desativarUsuario(idUsuario);
+        log.info("Auth: deletar usuário");
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/alterar-senha/{idUsuario}")
+    public ResponseEntity<UsuarioDTO> updatePassword(@PathVariable Integer idUsuario, @RequestBody String senha) throws RegraDeNegocioException {
+        log.info("Auth: alterar senha do usuário");
+        return new ResponseEntity<>(usuarioService.alterarSenha(idUsuario, senha), HttpStatus.OK);
+    }
+
+    @PutMapping("/{idUsuario}")
+    public ResponseEntity<UsuarioDTO> update(@PathVariable Integer idUsuario, @RequestBody UsuarioCreateDTO usuarioCreateDTO) throws RegraDeNegocioException {
+        return new ResponseEntity<>(usuarioService.updateUsuario(idUsuario, usuarioCreateDTO), HttpStatus.OK);
+    }
+
+    @GetMapping("/dados/logado")
+    public ResponseEntity<UsuarioDTO> retornarUsuarioLogado() throws RegraDeNegocioException {
+        return new ResponseEntity<>(usuarioService.retornarUsuarioLogado(), HttpStatus.OK);
+    }
+
+    @PostMapping("/cadastrar/usuario")
+    public ResponseEntity<UsuarioDTO> createUsuario(@RequestBody UsuarioCreateDTO usuarioCreateDTO){
+        return new ResponseEntity<>(usuarioService.createUsuario(usuarioCreateDTO), HttpStatus.OK);
+    }
+
 }

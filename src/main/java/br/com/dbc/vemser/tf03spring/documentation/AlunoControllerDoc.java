@@ -7,6 +7,7 @@ import freemarker.template.TemplateException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.mail.MessagingException;
@@ -44,11 +45,11 @@ public interface AlunoControllerDoc {
     ResponseEntity<List<AlunoDTO>> findAll() throws RegraDeNegocioException;
 
 
-    @Operation(summary = "Lista um aluno", description = "Lista um aluno específico do banco de dados." +
+    @Operation(summary = "Procura aluno", description = "Procura aluno pelo id no banco de dados.." +
             " Para isso, o ID do aluno a ser listado deverá ser informado na URL da requisição.")
     @ApiResponses(
             value = {
-                    @ApiResponse(responseCode = "200", description = "Lista um aluno"),
+                    @ApiResponse(responseCode = "200", description = "Procura aluno pelo id."),
                     @ApiResponse(responseCode = "403", description = "Você não tem permissão para acessar este recurso"),
                     @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
             }
@@ -56,6 +57,17 @@ public interface AlunoControllerDoc {
     @GetMapping("/{idAluno}")
     ResponseEntity<AlunoDTO> findById(@PathVariable("idAluno") @Positive Integer idAluno) throws RegraDeNegocioException;
 
+    @Operation(summary = "Lista alunos paginados", description = "Lista alunos paginados." +
+            "Para isso, informar a página e a quantidade de alunos a serem mostradas")
+    @ApiResponses(
+            value = {
+                    @ApiResponse(responseCode = "200", description = "Retorna páginação de alunos paginado conforme os argumentos recebidos."),
+                    @ApiResponse(responseCode = "403", description = "Você não tem permissão para acessar este recurso"),
+                    @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
+            }
+    )
+    @GetMapping("/paginado")
+    public Page<AlunoDTO> findAllPaginados(Integer numeroDePaginas, Integer quantidadeDeRegistros);
     @Operation(summary = "Atualiza um aluno", description = "Atualiza um aluno e o persiste no banco de dados." +
             " Para isso, o ID do recurso a ser atualizado deverá ser informado na URL da requisição, e as" +
             " informações do aluno a ser atualizado deverão ser informadas no corpo da requisição." +
